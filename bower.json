@@ -1,0 +1,26 @@
+{
+  "name": "angular-apikeys",
+  "version": "1.0.0"
+  "description": "A Angular module with a service for holding your API keys",
+  "homepage": "https://github.com/ronnyhaase/angular-apikeys",
+  "authors": [
+    "Ronny Haase <ronhaase@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular", "angularjs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ronnyhaase/angular-apikeys.git"
+  },
+
+  "main": "dist/angular-apikeys.js",
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": ">= 1.2.0"
+  }
+}
