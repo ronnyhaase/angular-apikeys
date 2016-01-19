@@ -9,20 +9,12 @@ var expect = chai.expect;
 describe('Unit: APIKeys', function() {
 	// Some defaults for testing
 	var invalidKeys = [
-				true,
-				1,
-				[1],
-				{a:'a'},
-				/[a-z]/,
+				true, 1, [1], {a:'a'}, /[a-z]/,
 
-				false,
-				0,
-				null,
-				undefined,
-				NaN
-			],
-			validKey = 'test',
-			validValue = '1234567890';
+				false, 0, null, undefined, NaN
+		],
+		validKey = 'test',
+		validValue = '1234567890';
 
 	describe('API', function () {
 		var service;
@@ -80,14 +72,29 @@ describe('Unit: APIKeys', function() {
 				invalidKeys.forEach(function (key) {
 					expect(
 						service.get(key)
-					).to.not.be.ok;
+					).to.be.false;
 				});
+			});
+
+			it('should return false for a key containing a empty string', function () {
+				expect(
+					service.get('')
+				).to.be.false;
 			});
 		});
 
 		describe('(scenarios)', function () {
 			it('#set() does really not store invalid keys', function () {
+				invalidKeys.forEach(function (id) {
+					expect(
+						service.set(id, validValue)
+					).to.not.be.ok;
 
+					expect(
+						service.get(id)
+					).to.not.equal(validValue)
+						.and.to.not.be.ok;
+				});
 			});
 		});
 	});
