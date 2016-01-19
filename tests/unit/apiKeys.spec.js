@@ -9,6 +9,7 @@ var expect = chai.expect;
 describe('Unit: APIKeys', function() {
 	// Some defaults for testing
 	var invalidKeys = [
+				'', // (!)
 				true, 1, [1], {a:'a'}, /[a-z]/,
 
 				false, 0, null, undefined, NaN
@@ -30,27 +31,15 @@ describe('Unit: APIKeys', function() {
 			it('should return true when calling with valid key & value', function () {
 				expect(
 					service.set(validKey, validValue)
-				).to.be.ok;
+				).to.be.true;
 			});
 
 			it('should return false if key is not a string or anything strange', function () {
 				invalidKeys.forEach(function (id) {
 					expect(
 						service.set(id, validValue)
-					).to.not.be.ok;
-
-					// Probably shouldn't use yet untested methods
-					/*expect(
-						service.get(id)
-					).to.not.equal(value)
-						.and.to.not.be.ok;*/
+					).to.be.false;
 				});
-			});
-
-			it('should also return false if key is a empty string', function () {
-				expect(
-					service.set('', validValue)
-				).to.not.be.ok;
 			});
 		});
 
@@ -59,7 +48,7 @@ describe('Unit: APIKeys', function() {
 				service.set(validKey, validValue);
 				expect(
 					service.get(validKey)
-				).to.be.eq(validValue);
+				).to.be.equal(validValue);
 			});
 
 			it('should return undefined for a valid key, NOT set before', function () {
@@ -75,12 +64,6 @@ describe('Unit: APIKeys', function() {
 					).to.be.false;
 				});
 			});
-
-			it('should return false for a key containing a empty string', function () {
-				expect(
-					service.get('')
-				).to.be.false;
-			});
 		});
 
 		describe('(scenarios)', function () {
@@ -88,12 +71,18 @@ describe('Unit: APIKeys', function() {
 				invalidKeys.forEach(function (id) {
 					expect(
 						service.set(id, validValue)
-					).to.not.be.ok;
+					).to.be.false;
 
 					expect(
 						service.get(id)
-					).to.not.equal(validValue)
-						.and.to.not.be.ok;
+					).to.not.equal(validValue);
+
+					// A seperate test, otherwise the previous expect would
+					// need ".not.to.be.false" appended which reads awful even
+					// though logically correct
+					expect(
+						service.get(id)
+					).to.be.false;
 				});
 			});
 		});

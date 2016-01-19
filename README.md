@@ -56,4 +56,5 @@ angular.module('myOtherApp').config(function (apiKeysProvider) {
 Things like read-only, more strict key/value validation or other crazy ideas may be added later, if necessary.
 
 ## Contributing
-Please create an issue. If you add a pull request, try to respect my code style and assure the tests do pass, and extend them if necessary!
+Please create an issue. If you add a pull request, try to respect my code style, check for JSHint and assure the unit tests do pass, and extend them if necessary!
+

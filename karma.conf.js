@@ -10,7 +10,7 @@ module.exports = function(config) {
 			'node_modules/chai/chai.js',
 
 			'src/module.js',
-			'src/APIKeys.js',
+			'src/apiKeys.js',
 
 			'tests/**/*.spec.js'
 		],
