@@ -16,7 +16,7 @@
 		}
 
 		function get(id) {
-			if (!angular.isString(id) && id !== '') {
+			if (!angular.isString(id) || id === '') {
 				return false;
 			}
 
