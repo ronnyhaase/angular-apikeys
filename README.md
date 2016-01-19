@@ -16,7 +16,8 @@ One developer uses angular-apikeys to add all keys in his app, and different oth
 The module is "apikeys" and it just consists of the service "apiKeys", which has the methods `get(key)` and `set(key, value)`:
 
 ```javascript
-angular.module('myApp', ['apikeys']).run(['apiKeys', function (apiKeys) {
+angular.module('myApp', ['apikeys']);
+angular.module('myApp').run(['apiKeys', function (apiKeys) {
 	fetchMyApiKeySomehow.then(function() {
 		apiKeys.set('googleGeocode', '1234567890');
 	});
