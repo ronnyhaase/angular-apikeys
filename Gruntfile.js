@@ -67,7 +67,7 @@ module.exports = function(grunt) {
 
 	require('load-grunt-tasks')(grunt);
 
-	grunt.registerTask('test', ['karma:once']);
+	grunt.registerTask('test', ['jshint', 'karma:once']);
 	grunt.registerTask('build', ['concat', 'jshint', 'uglify']);
 	grunt.registerTask('default', ['build', 'test']);
 };

@@ -17,6 +17,8 @@
 
   "main": "dist/angular-apikeys.js",
   "ignore": [
+    ".idea",
+    "*.iml",
     "node_modules",
     "bower_components"
   ],
