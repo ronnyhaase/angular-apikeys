@@ -8,7 +8,7 @@ var expect = chai.expect;
 
 describe('Unit: APIKeys', function() {
 	// Some defaults for testing
-	var invalidKeys = [
+	var invalidKeysAndValues = [
 				'', // (!)
 				true, 1, [1], {a:'a'}, /[a-z]/,
 
@@ -17,6 +17,7 @@ describe('Unit: APIKeys', function() {
 		validKey = 'test',
 		validValue = '1234567890';
 
+	// API tests
 	describe('API', function () {
 		var service;
 
@@ -28,37 +29,46 @@ describe('Unit: APIKeys', function() {
 		}));
 
 		describe('#set()', function () {
-			it('should return true when calling with valid key & value', function () {
+			it('should return true when calling with valid @key & @value', function () {
 				expect(
 					service.set(validKey, validValue)
 				).to.be.true;
 			});
 
-			it('should return false if key is not a string or anything strange', function () {
-				invalidKeys.forEach(function (id) {
+			it('should return false if @key is not a filled string', function () {
+				invalidKeysAndValues.forEach(function (key) {
 					expect(
-						service.set(id, validValue)
+						service.set(key, validValue)
+					).to.be.false;
+				});
+			});
+
+			it('should return false if @value is not a filled string', function () {
+				var n = 1;
+				invalidKeysAndValues.forEach(function (value) {
+					expect(
+						service.set(validKey + n++, value)
 					).to.be.false;
 				});
 			});
 		});
 
 		describe('#get()', function () {
-			it('should return the value for a valid key, if set with #set() before', function () {
+			it('should return the value for a valid @key, if set with #set() before', function () {
 				service.set(validKey, validValue);
 				expect(
 					service.get(validKey)
 				).to.be.equal(validValue);
 			});
 
-			it('should return undefined for a valid key, NOT set before', function () {
+			it('should return undefined for a valid @key, NOT set before', function () {
 				expect(
 					service.get(validKey)
 				).to.be.undefined;
 			});
 
-			it('should return false for any invalid key', function () {
-				invalidKeys.forEach(function (key) {
+			it('should return false for any invalid @key', function () {
+				invalidKeysAndValues.forEach(function (key) {
 					expect(
 						service.get(key)
 					).to.be.false;
@@ -68,20 +78,20 @@ describe('Unit: APIKeys', function() {
 
 		describe('(scenarios)', function () {
 			it('#set() does really not store invalid keys', function () {
-				invalidKeys.forEach(function (id) {
+				invalidKeysAndValues.forEach(function (key) {
 					expect(
-						service.set(id, validValue)
+						service.set(key, validValue)
 					).to.be.false;
 
 					expect(
-						service.get(id)
+						service.get(key)
 					).to.not.equal(validValue);
 
 					// A seperate test, otherwise the previous expect would
 					// need ".not.to.be.false" appended which reads awful even
 					// though logically correct
 					expect(
-						service.get(id)
+						service.get(key)
 					).to.be.false;
 				});
 			});
@@ -111,7 +121,7 @@ describe('Unit: APIKeys', function() {
 			expect(provider.set).to.not.be.undefined;
 		});
 
-		it('should store a valid key/value pair with #set() and return it with #get()', function () {
+		it('should store a valid @key and @value with #set() and return it with #get()', function () {
 			expect(
 				provider.set(validKey, validValue)
 			).to.not.be.false;
