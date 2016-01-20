@@ -8,8 +8,28 @@ https://github.com/ronnyhaase/angular-apikeys
 ## Introduction
 If you ever run into the problem of talking to a lot of APIs in your AngularJS SPA and needed a place to manage the API keys, this tiny, unfancy module with just one lonesome service **(backed by unit tests)** is for you!
 
-It's also used as optional dependency by other modules and services implementing APIs, as a kind of registry:
-One developer uses angular-apikeys to add all keys in his app, and different other services by different other devs all look up their unique ID at the angular-apikeys service when it is injected. *(More details follow)*
+It's also used as optional dependency by other modules and services implementing APIs, as a kind of registry. *(More details will follow)*
+
+## Installation
+
+Use `npm`:
+
+	$ npm install angular-apikeys
+
+Or `Bower`:
+
+	$ bower install angular-apikeys
+
+Or grab the latest [release](https://github.com/ronnyhaase/angular-apikeys/releases) and add the JS file manually.
+
+```html
+<script src="angular-apikeys.js"></script>
+```
+Or minified:
+
+```html
+<script src="angular-apikeys.min.js"></script>
+```
 
 ## HowTo
 
@@ -18,7 +38,7 @@ The module is "apikeys" and it just consists of the service "apiKeys", which has
 ```javascript
 angular.module('myApp', ['apikeys']);
 angular.module('myApp').run(['apiKeys', function (apiKeys) {
-	fetchMyApiKeySomehow.then(function() {
+	fetchMyApiKeySomehow().then(function() {
 		apiKeys.set('googleGeocode', '1234567890');
 	});
 }]);
@@ -57,4 +77,3 @@ Things like read-only, more strict key/value validation or other crazy ideas may
 
 ## Contributing
 Please create an issue. If you add a pull request, try to respect my code style, check for JSHint and assure the unit tests do pass, and extend them if necessary!
-
