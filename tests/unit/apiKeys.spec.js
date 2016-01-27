@@ -76,6 +76,30 @@ describe('Unit: APIKeys', function() {
 			});
 		});
 
+		describe('#has()', function () {
+			it('should return true for a valid @key, if set with #set() before', function () {
+				service.set(validKey, validValue);
+
+				expect(
+					service.has(validKey)
+				).to.be.true;
+			});
+
+			it('should return false for a valid @key, not set before', function () {
+				expect(
+					service.has(validKey)
+				).to.be.false;
+			});
+
+			it('should return false for a invalid @key', function () {
+				invalidKeysAndValues.forEach(function (key) {
+					expect(
+						service.has(key)
+					).to.be.false;
+				});
+			});
+		});
+
 		describe('(scenarios)', function () {
 			it('#set() does really not store invalid keys', function () {
 				invalidKeysAndValues.forEach(function (key) {
@@ -116,15 +140,20 @@ describe('Unit: APIKeys', function() {
 			expect(provider).to.not.be.undefined;
 		});
 
-		it('should have it\'s methods #get() and #set()', function () {
+		it('should have it\'s methods #get(), #set() and #has()', function () {
 			expect(provider.get).to.not.be.undefined;
 			expect(provider.set).to.not.be.undefined;
+			expect(provider.has).to.not.be.undefined;
 		});
 
-		it('should store a valid @key and @value with #set() and return it with #get()', function () {
+		it('should store a valid @key and @value with #set(), approve with #has() and return it with #get()', function () {
 			expect(
 				provider.set(validKey, validValue)
 			).to.not.be.false;
+
+			expect(
+				provider.has(validKey)
+			).to.be.true;
 
 			expect(
 				provider.get(validKey)
@@ -152,6 +181,11 @@ describe('Unit: APIKeys', function() {
 
 		it('should access values that were set in configuration phase via the provider, at runtime via the instance', function () {
 			provider.set(validKey, validValue);
+
+			expect(
+				instance.has(validKey)
+			).to.be.true;
+
 			expect(
 				instance.get(validKey)
 			).to.equal(validValue);

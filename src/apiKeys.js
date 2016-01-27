@@ -23,13 +23,23 @@
 			return _apiKeys[id];
 		}
 
+		function has(id) {
+			if (!angular.isString(id) || id === '') {
+				return false;
+			}
+
+			return !!_apiKeys[id];
+		}
+
 		this.get = get;
 		this.set = set;
+		this.has = has;
 
 		this.$get = [function apiKeysFactoy() {
 			return {
 				get: get,
-				set: set
+				set: set,
+				has: has
 			};
 		}];
 	});

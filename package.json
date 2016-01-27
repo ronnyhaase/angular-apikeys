@@ -15,7 +15,6 @@
   "bugs": {
     "url": "https://github.com/ronnyhaase/angular-apikeys/issues"
   },
-
   "main": "index.js",
   "scripts": {
     "test": "grunt test",

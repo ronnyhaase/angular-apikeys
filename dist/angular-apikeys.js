@@ -1,6 +1,8 @@
 /*
- * angular-apikeys - Copyright (c) Ronny Haase, 2016.
+ * angular-apikeys - Copyright (C) Ronny Haase, 2016.
+ *
  * Licensed under The MIT License.
+ *
  * https://github.com/ronnyhaase/angular-apikeys
  */
 (function() {
@@ -34,13 +36,23 @@
 			return _apiKeys[id];
 		}
 
+		function has(id) {
+			if (!angular.isString(id) || id === '') {
+				return false;
+			}
+
+			return !!_apiKeys[id];
+		}
+
 		this.get = get;
 		this.set = set;
+		this.has = has;
 
 		this.$get = [function apiKeysFactoy() {
 			return {
 				get: get,
-				set: set
+				set: set,
+				has: has
 			};
 		}];
 	});

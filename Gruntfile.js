@@ -5,8 +5,10 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		meta: {
 			banner: '/*\n' +
-				' * angular-apikeys - Copyright (c) Ronny Haase, 2016.\n' +
+				' * angular-apikeys - Copyright (C) Ronny Haase, 2016.\n' +
+				' *\n' +
 				' * Licensed under The MIT License.\n' +
+				' *\n' +
 				' * https://github.com/ronnyhaase/angular-apikeys\n' +
 				' */\n'
 		},
@@ -41,8 +43,8 @@ module.exports = function(grunt) {
 
 		watch: {
 			scripts : {
-				files : ['src/**/*.js', 'tests/*.js'],
-				tasks : ['jshint', 'karma:all:run']
+				files : ['./*.js', 'src/**/*.js', 'tests/*.js'],
+				tasks : ['jshint', 'karma:once']
 			}
 		},
 
@@ -68,6 +70,6 @@ module.exports = function(grunt) {
 	require('load-grunt-tasks')(grunt);
 
 	grunt.registerTask('test', ['jshint', 'karma:once']);
-	grunt.registerTask('build', ['concat', 'jshint', 'uglify']);
+	grunt.registerTask('build', ['concat', 'uglify']);
 	grunt.registerTask('default', ['build', 'test']);
 };
