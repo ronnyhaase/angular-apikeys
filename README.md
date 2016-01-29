@@ -2,18 +2,22 @@
 A Angular module with a service for a more elegant sharing and storing of your API keys
 
 Copyright (c) Ronny Haase, 2016.
+
 Licensed under The MIT License.
+
 https://github.com/ronnyhaase/angular-apikeys
 
 ## Introduction
 If you ever run into the problem of talking to a lot of APIs in your AngularJS application and needed a place to manage the API keys, this tiny, unfancy module with just one lonesome service **(backed by unit tests)** is for you!
 
-It's also used as optional dependency by other modules and services implementing APIs, as a kind of registry. *(More details [here](#using_angular-apikeys_as_registry))*
+It's also used as optional dependency by other modules and services implementing APIs, as a kind of registry. *(More details [here](#using-angular-apikeys-as-registry))*
 
 ## Why
 Because it
+
 1. Decouples the problem of holding API keys
-2. Is more elegant than solving this with `angular.constant` or `angular.value` especially across multiple modules.
+3. Can be used as a generic way of handling API keys across projects
+2. Is more elegant than solving this with `angular.constant` or `angular.value` especially across multiple modules
 
 ## Installation
 
@@ -162,6 +166,8 @@ Likely you want to reuse your services for Google Maps APIs across projects.
 By injecting angular-apikeys without declaring it explicitly as dependency, your services can provide a generic way to provide them with API keys, but neither your API modules & services nor other applications/modules usign them need to use angular-apikeys.
 
 This is how it could look like:
+
+[See on Plunker](http://plnkr.co/edit/eE98GLKgDFAqItji1bPR?p=preview)
 
 ````javascript
 // (No "hard" dependency to apiKeys)
